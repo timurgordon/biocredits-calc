@@ -559,7 +559,8 @@ def convert_to_multipolygon(geometry):
         raise ValueError("Geometry is neither a Polygon nor a MultiPolygon nor a GeometryCollection")
 
 def daily_score_union(eco_expanded):
-    eco_score = eco_expanded.groupby('date').apply(lambda group: nonoverlapping_maxscore(group)).reset_index()
+    # Ensure 'geometry' column is present in each group before applying nonoverlapping_maxscore
+    eco_score = eco_expanded.groupby('date').apply(lambda group: nonoverlapping_maxscore(group) if 'geometry' in group.columns else None).dropna().reset_index() 
     eco_score = gpd.GeoDataFrame(eco_score, geometry='geometry', crs=eco_expanded.crs)
     eco_score['geometry'] = eco_score['geometry'].apply(convert_to_multipolygon)
     return eco_score
