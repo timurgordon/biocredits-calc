@@ -103,7 +103,6 @@ def kml_to_shp(source_directory='KML/', destination_directory='SHP/'):
                 print(f"Error converting {filename} to {base_name}.shp")
             else:
                 print(f"Converted {filename} to {base_name}.shp")
-    insert_log_entry('Error in plots:', ', '.join(error_list))
 
 def load_shp(directory='SHP/'):
     # Loop through all .shp files in the directory and load them
