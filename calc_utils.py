@@ -161,8 +161,6 @@ def normalize_shps(gdfs):
             raise ValueError("Unsupported geometry type!")
         lands[key] = Polygon(coords)
         
-    insert_log_entry('Point KMLs:', str(point_shps))
-    insert_log_entry('Polygon KMLs:', str(polygon_shps))
     return lands
 
 def reorder_polygons(gdfs, reorder_lands=[]):
