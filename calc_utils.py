@@ -667,7 +667,7 @@ def daily_attibution(eco_score, lands, obs_expanded, crs=6262):
     attribution = attribution.set_index('date')
 
     # Finding observations for each finca/date/score combination
-    fincas_to_obs = gpd.sjoin(fincas6262, obs_expanded6262, how="inner", predicate="intersects")
+    fincas_to_obs = gpd.sjoin(fincas_reset, obs_expanded6262, how="inner", predicate="intersects")
     # Group by date, farm, and score and aggregate the eco_id into lists
     groupcols = ['plot_id', 'value', 'date', 'score'] if 'value' in fincas_to_obs.columns else ['plot_id', 'date', 'score']  
     fincas_to_obs = (fincas_to_obs.groupby(groupcols)
